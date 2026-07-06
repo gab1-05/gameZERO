@@ -1,0 +1,14 @@
+const fs = require('fs');
+const p = 'c:\\projects\\gameZERO\\Attached-Assets\\artifacts\\gaming-optimizer\\electron\\main.cjs';
+const lines = fs.readFileSync(p, 'utf8').split(/\r?\n/);
+const line = lines[196];
+const idx = line.indexOf('key ');
+const prefix = line.slice(0, idx + 4);
+const tail = line.slice(idx + 4);
+console.log('Tail:', JSON.stringify(tail));
+const fixedTail = tail.replace(/\+ '\\''''/, "+ '\\\\'");
+console.log('FixedTail:', JSON.stringify(fixedTail));
+lines[196] = prefix + fixedTail;
+fs.writeFileSync(p, lines.join('\n'));
+console.log('Fixed trailing quotes');
+console.log('New line:', lines[196]);

@@ -1,0 +1,11 @@
+const fs = require('fs');
+const p = 'c:\\projects\\gameZERO\\Attached-Assets\\artifacts\\gaming-optimizer\\electron\\main.cjs';
+const lines = fs.readFileSync(p, 'utf8').split(/\r?\n/);
+const target = lines[196];
+console.log('Current line 197:', target);
+console.log('Current line 197 char codes:', [...target].map(c=>c.charCodeAt(0)));
+const fixed = target.replace("-Path '' +", "-Path \\'' +").replace("+ key + ''", "+ key + '\\''");
+console.log('Fixed line 197:', fixed);
+lines[196] = fixed;
+fs.writeFileSync(p, lines.join('\n'));
+console.log('Wrote file');

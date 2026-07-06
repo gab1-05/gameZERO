@@ -1,0 +1,9 @@
+{
+  "name": "gameZERO",
+  "private": true,
+  "scripts": {
+    "build": "pnpm -C Attached-Assets/artifacts/gaming-optimizer run build:electron",
+    "dist": "pnpm -C Attached-Assets/artifacts/gaming-optimizer run package:win",
+    "typecheck": "pnpm -C Attached-Assets/artifacts/gaming-optimizer run typecheck"
+  }
+}
