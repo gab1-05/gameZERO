@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ShieldAlert, Info, Monitor, Download, Upload, Wifi } from "lucide-react";
 import { ResponsiveContainer, AreaChart, Area, XAxis, Tooltip, YAxis } from "recharts";
 import { useSystemMetrics, useThermalHistory, bytesToGb, useSystemInfo, useNetworkSpeed } from "@/lib/system-api";
+import { useLocation } from "wouter";
 
 function NetworkSpeedCard() {
   const { data: network, loading: networkLoading } = useNetworkSpeed(2000);
@@ -96,6 +97,7 @@ function KpiCard({
 }
 
 export default function Overview() {
+  const [, setLocation] = useLocation();
   const { data: metrics, loading: metricsLoading } = useSystemMetrics(3000);
   const { data: thermals, loading: thermalsLoading } = useThermalHistory(5000);
   const { data: systemInfo, loading: sysInfoLoading } = useSystemInfo();
@@ -199,7 +201,7 @@ export default function Overview() {
             {metricsLoading ? "Scanning system hardware..." : systemLabel}
           </div>
         </div>
-        <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 shrink-0" data-testid="btn-quick-optimize">
+        <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 shrink-0" data-testid="btn-quick-optimize" onClick={() => setLocation("/optimize")}>
           Run Quick Optimize
         </Button>
       </div>

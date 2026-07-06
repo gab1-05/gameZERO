@@ -17,7 +17,7 @@ const isElectron = typeof window !== "undefined" && !!window.electronAPI?.isElec
 
 const pendingRequests = new Map<string, Promise<any>>();
 
-async function fetchJson<T>(path: string, payload?: unknown): Promise<T> {
+async function fetchJson<T>(path: string, payload?: unknown, retries = 2): Promise<T> {
   if (isElectron && window.electronAPI?.systemQuery) {
     const endpoint = path.replace(/^\//, "").replace(/\//g, ":");
     const cacheKey = `${endpoint}:${JSON.stringify(payload ?? "")}`;
@@ -28,14 +28,21 @@ async function fetchJson<T>(path: string, payload?: unknown): Promise<T> {
     }
     
     const promise = (async () => {
-      try {
-        const result = payload !== undefined
-          ? await electronAPI.systemCommand(endpoint, payload)
-          : await electronAPI.systemQuery(endpoint);
-        return result as Promise<T>;
-      } finally {
-        pendingRequests.delete(cacheKey);
+      let lastError: Error | null = null;
+      for (let i = 0; i <= retries; i++) {
+        try {
+          const result = payload !== undefined
+            ? await electronAPI.systemCommand(endpoint, payload)
+            : await electronAPI.systemQuery(endpoint);
+          return result as Promise<T>;
+        } catch (e) {
+          lastError = e as Error;
+          if (i < retries) {
+            await new Promise(r => setTimeout(r, Math.pow(2, i) * 1000));
+          }
+        }
       }
+      throw lastError || new Error("Request failed");
     })();
     
     pendingRequests.set(cacheKey, promise);
@@ -486,6 +493,7 @@ export function useNetworkSpeed(intervalMs = 2000) {
   useEffect(() => {
     let alive = true;
     let timeoutId: NodeJS.Timeout;
+    let currentInterval = intervalMs;
     
     const poll = async () => {
       try { 
@@ -493,10 +501,13 @@ export function useNetworkSpeed(intervalMs = 2000) {
         if (alive && r) { 
           setData(r); 
           setLoading(false); 
+          currentInterval = intervalMs; // Reset on success
         }
       }
-      catch (_) {}
-      timeoutId = setTimeout(poll, intervalMs);
+      catch (_) {
+        currentInterval = Math.min(currentInterval * 1.5, 30000); // Backoff on error
+      }
+      timeoutId = setTimeout(poll, currentInterval);
     };
     
     poll();

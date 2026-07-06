@@ -71,26 +71,6 @@ const WindowTitlebar = memo(function WindowTitlebar({ onToggleTheme, theme }: { 
       className="h-10 flex items-center justify-between px-4 border-b border-titlebar-border bg-titlebar shrink-0 select-none relative z-30"
       style={{ WebkitAppRegion: "drag" } as React.CSSProperties}
     >
-      <div
-        className="flex items-center gap-1.5"
-        style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}
-      >
-        <button
-          onClick={() => isElectron ? window.electronAPI!.minimize() : undefined}
-          className="w-7 h-7 flex items-center justify-center rounded hover:bg-white/10 transition-colors text-muted-foreground hover:text-foreground"
-          title="Minimize"
-        >
-          <Minus className="w-3.5 h-3.5" />
-        </button>
-        <button
-          onClick={() => isElectron ? window.electronAPI!.close() : undefined}
-          className="w-7 h-7 flex items-center justify-center rounded hover:bg-red-500/20 transition-colors text-muted-foreground hover:text-red-500"
-          title="Close"
-        >
-          <X className="w-3.5 h-3.5" />
-        </button>
-      </div>
-
       <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 pointer-events-none">
         <Terminal className="w-3.5 h-3.5 text-primary" />
         <span className="text-xs font-semibold tracking-widest text-foreground/80 uppercase">
@@ -99,7 +79,7 @@ const WindowTitlebar = memo(function WindowTitlebar({ onToggleTheme, theme }: { 
       </div>
 
       <div
-        className="flex items-center gap-2 text-xs text-muted-foreground tabular-nums"
+        className="flex items-center gap-2 text-xs text-muted-foreground tabular-nums ml-auto"
         style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}
       >
         <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
@@ -112,6 +92,22 @@ const WindowTitlebar = memo(function WindowTitlebar({ onToggleTheme, theme }: { 
         >
           {theme === "dark" ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
         </Button>
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={() => isElectron ? window.electronAPI!.minimize() : undefined}
+            className="w-7 h-7 flex items-center justify-center rounded hover:bg-white/10 transition-colors text-muted-foreground hover:text-foreground"
+            title="Minimize"
+          >
+            <Minus className="w-3.5 h-3.5" />
+          </button>
+          <button
+            onClick={() => isElectron ? window.electronAPI!.close() : undefined}
+            className="w-7 h-7 flex items-center justify-center rounded hover:bg-red-500/20 transition-colors text-muted-foreground hover:text-red-500"
+            title="Close"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </div>
     </div>
   );
