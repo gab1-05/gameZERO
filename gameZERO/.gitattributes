@@ -1,0 +1,5 @@
+artifacts/gaming-optimizer/dist-electron/gameZERO-2.4.1-linux.tar.gz filter=lfs diff=lfs merge=lfs -text
+artifacts/gaming-optimizer/dist-electron/gameZERO-2.4.1.AppImage filter=lfs diff=lfs merge=lfs -text
+artifacts/gaming-optimizer/dist-electron/linux-unpacked/gameZERO filter=lfs diff=lfs merge=lfs -text
+artifacts/gaming-optimizer/dist-electron/gameZERO-2.4.1-win.zip filter=lfs diff=lfs merge=lfs -text
+artifacts/gaming-optimizer/dist-electron/win-unpacked/gameZERO.exe filter=lfs diff=lfs merge=lfs -text

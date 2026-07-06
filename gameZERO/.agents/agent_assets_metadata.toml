@@ -1,0 +1,20 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "py-M5Bv4NNQLt0pNWYRtL"
+uri = "file://artifacts/gaming-optimizer/dist-electron/gameZERO-2.4.1-linux.tar.gz"
+type = "unspecified"
+title = "gameZERO v2.4.1 — Linux Desktop App"
+
+[[outputs]]
+id = "ee0E7IVwhqW80mj2KpKsu"
+uri = "file://README.md"
+type = "text"
+title = "gameZERO — Full Feature README"
+
+[[outputs]]
+id = "Fe8aJrUVpT3RqEJPztcDK"
+uri = "file://artifacts/gaming-optimizer/dist-electron/gameZERO-2.4.1-win.zip"
+type = "unspecified"
+title = "gameZERO 2.4.1 — Windows (fixed)"
