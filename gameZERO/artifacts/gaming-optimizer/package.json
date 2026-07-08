@@ -30,8 +30,10 @@
     "files": [
       "dist-web/**/*",
       "electron/main.bundle.cjs",
-      "electron/preload.cjs",
-      "build/**/*"
+      "electron/preload.cjs"
+    ],
+    "extraFiles": [
+      "build/"
     ],
     "directories": {
       "output": "dist-electron"

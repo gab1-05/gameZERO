@@ -10,7 +10,9 @@ files:
       - dist-web/**/*
       - electron/main.bundle.cjs
       - electron/preload.cjs
-      - build/**/*
+extraFiles:
+  - filter:
+      - build/
 linux:
   target:
     - target: AppImage
