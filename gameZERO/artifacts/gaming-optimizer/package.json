@@ -30,7 +30,8 @@
     "files": [
       "dist-web/**/*",
       "electron/main.bundle.cjs",
-      "electron/preload.cjs"
+      "electron/preload.cjs",
+      "build/**/*"
     ],
     "directories": {
       "output": "dist-electron"
@@ -91,7 +92,11 @@
     },
     "portable": {
       "artifactName": "${productName}-${version}-portable.${ext}"
-    }
+    },
+    "asarUnpack": [
+      "**/node_modules/systeminformation/**/*",
+      "**/*.node"
+    ]
   },
   "devDependencies": {
     "electron": "^43.0.0",

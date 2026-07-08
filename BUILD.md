@@ -54,8 +54,8 @@ Build artifacts are emitted to:
 
 ```
 Attached-Assets/artifacts/gaming-optimizer/dist-electron/
-```
-
+``` 
+ 
 ### Windows
 - `gameZERO Setup x.x.x.exe` — NSIS installer (one-click or custom dir).
 - `gameZERO x.x.x-win.zip` — Zip archive.

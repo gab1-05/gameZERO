@@ -10,6 +10,7 @@ files:
       - dist-web/**/*
       - electron/main.bundle.cjs
       - electron/preload.cjs
+      - build/**/*
 linux:
   target:
     - target: AppImage
@@ -44,4 +45,7 @@ nsis:
   installerHeaderIcon: build/icon.ico
 portable:
   artifactName: ${productName}-${version}-portable.${ext}
+asarUnpack:
+  - '**/node_modules/systeminformation/**/*'
+  - '**/*.node'
 electronVersion: 43.0.0
